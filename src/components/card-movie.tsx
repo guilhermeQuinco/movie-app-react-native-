@@ -1,16 +1,23 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { Movie } from "../services/movies/MovieApiModels";
 import { BASE_IMAGE_URL } from "../constants";
+import { useNavigation } from "@react-navigation/native";
 
-const CardMovie = ({ poster_path }: Movie) => {
+const CardMovie = (movie: Movie) => {
+  const navigation = useNavigation();
+
+  function navigateToMovie() {
+    navigation.navigate("MovieDetails", { movie });
+  }
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={navigateToMovie}>
       <Image
-        source={{ uri: `${BASE_IMAGE_URL}/${poster_path}` }}
+        source={{ uri: `${BASE_IMAGE_URL}/${movie.poster_path}` }}
         style={{ width: 200, height: 300, borderRadius: 20 }}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

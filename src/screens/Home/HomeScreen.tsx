@@ -6,17 +6,20 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { getNowPlayingMovies } from "../services/movies/MoviesServices";
+import { getNowPlayingMovies } from "../../services/movies/MoviesServices";
 import { useQuery } from "@tanstack/react-query";
-import NavBar from "../components/nav-bar";
-import { Movie, MoviesResponse } from "../services/movies/MovieApiModels";
-import CardMovie from "../components/card-movie";
-import ItemSeparator from "../components/item-separator";
-import { api } from "../api";
+import NavBar from "../../components/nav-bar";
+import { Movie } from "../../services/movies/MovieApiModels";
+import CardMovie from "../../components/card-movie";
+import ItemSeparator from "../../components/item-separator";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "./HomeStackScreen";
 
-const HomeScreen = () => {
+type HomeScreenProps = StackScreenProps<RootStackParamList, "Home">;
+
+const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const { data: nowPlaying } = useQuery({
     queryKey: ["now-playing"],
     queryFn: getNowPlayingMovies,

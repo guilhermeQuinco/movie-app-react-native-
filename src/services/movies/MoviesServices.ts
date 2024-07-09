@@ -1,5 +1,6 @@
 import { api } from "../../api";
 import { Genre, MoviesResponse } from "./MovieApiModels";
+import { MovieDetail } from "./MovieDetailsApiModel";
 
 export async function getNowPlayingMovies() {
   const response = await api.get<MoviesResponse>(
@@ -23,4 +24,12 @@ export async function getGenres() {
   );
 
   return response.data.genres;
+}
+
+export async function getMovieDetails(movieId: number) {
+  const response = await api.get<MovieDetail>(
+    `movie/${movieId}?api_key=${process.env.API_KEY}`
+  );
+
+  return response.data;
 }
