@@ -14,12 +14,8 @@ import NavBar from "../../components/nav-bar";
 import { Movie } from "../../services/movies/MovieApiModels";
 import CardMovie from "../../components/card-movie";
 import ItemSeparator from "../../components/item-separator";
-import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "./HomeStackScreen";
 
-type HomeScreenProps = StackScreenProps<RootStackParamList, "Home">;
-
-const HomeScreen = ({ navigation }: HomeScreenProps) => {
+const HomeScreen = () => {
   const { data: nowPlaying } = useQuery({
     queryKey: ["now-playing"],
     queryFn: getNowPlayingMovies,
@@ -43,6 +39,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
           horizontal
           contentContainerStyle={{ gap: 10 }}
           ListHeaderComponent={<ItemSeparator width={2} height={0} />}
+          keyExtractor={(item) => item.id.toString()}
         />
       </View>
     </View>

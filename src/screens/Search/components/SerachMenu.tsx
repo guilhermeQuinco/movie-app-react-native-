@@ -1,12 +1,16 @@
-import { View, Text, TextInput, StyleSheet, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getGenres, getPopularMovies } from "../services/movies/MoviesServices";
-import CardMovie from "../components/card-movie";
-import { Movie } from "../services/movies/MovieApiModels";
-import ItemSeparator from "../components/item-separator";
+import {
+  getGenres,
+  getPopularMovies,
+  getTopRatedMovies,
+} from "../../../services/movies/MoviesServices";
+import CardMovie from "../../../components/card-movie";
+import { Movie } from "../../../services/movies/MovieApiModels";
+import ItemSeparator from "../../../components/item-separator";
 
-const SearchScreen = () => {
+const SearchMenu = () => {
   const { data: popular } = useQuery({
     queryKey: ["popular"],
     queryFn: getPopularMovies,
@@ -17,14 +21,17 @@ const SearchScreen = () => {
     queryFn: getGenres,
   });
 
+  const { data: topRated } = useQuery({
+    queryKey: ["topRated"],
+    queryFn: getTopRatedMovies,
+  });
+
   function renderItem({ item }: { item: Movie }) {
     return <CardMovie {...item} />;
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#060809" }}>
-      <TextInput style={styles.input} placeholder="Encontre filmes..." />
-
+    <View>
       <View style={{ gap: 10, paddingVertical: 30 }}>
         <Text style={{ color: "#fff", marginLeft: 10 }}>Genres</Text>
         <FlatList
@@ -44,6 +51,7 @@ const SearchScreen = () => {
           )}
           horizontal
           contentContainerStyle={{ gap: 10 }}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
 
@@ -58,19 +66,17 @@ const SearchScreen = () => {
           contentContainerStyle={{ gap: 10 }}
         />
       </View>
+      <View style={{ gap: 10, paddingVertical: 30 }}>
+        <Text style={{ color: "#fff", marginLeft: 10 }}>Top Rated Movies</Text>
+        <FlatList
+          data={topRated}
+          renderItem={renderItem}
+          horizontal
+          contentContainerStyle={{ gap: 10 }}
+        />
+      </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  input: {
-    margin: 5,
-    height: 50,
-    borderWidth: 1,
-    padding: 10,
-    backgroundColor: "gray",
-    marginTop: 50,
-    borderRadius: 10,
-  },
-});
-export default SearchScreen;
+export default SearchMenu;

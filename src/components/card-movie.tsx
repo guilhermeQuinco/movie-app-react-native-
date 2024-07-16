@@ -4,15 +4,18 @@ import { Movie } from "../services/movies/MovieApiModels";
 import { BASE_IMAGE_URL } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
-const CardMovie = (movie: Movie) => {
-  const navigation = useNavigation();
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamListHome } from "../router/Router";
 
-  function navigateToMovie() {
-    navigation.navigate("MovieDetails", { movie });
-  }
+const CardMovie = (movie: Movie) => {
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamListHome>>();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={navigateToMovie}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.push("MovieDetails", { movie })}
+    >
       <Image
         source={{ uri: `${BASE_IMAGE_URL}/${movie.poster_path}` }}
         style={{ width: 200, height: 300, borderRadius: 20 }}

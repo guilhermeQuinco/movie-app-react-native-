@@ -1,5 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import Router from "./src/router/Router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
