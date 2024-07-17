@@ -7,7 +7,7 @@ import StackNavigation from "./TabNavigator";
 import HomeScreen from "../screens/Home/HomeScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Movie } from "../services/movies/MovieApiModels";
-import MovieScreen from "../screens/Home/MovieScreen";
+import MovieScreen from "../screens/Movie/MovieScreen";
 import TabNavigation from "./TabNavigator";
 
 export type RootStackParamListHome = {

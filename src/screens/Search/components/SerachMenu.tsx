@@ -9,6 +9,7 @@ import {
 import CardMovie from "../../../components/card-movie";
 import { Movie } from "../../../services/movies/MovieApiModels";
 import ItemSeparator from "../../../components/item-separator";
+import SearchCardList from "./SearchCardList";
 
 const SearchMenu = () => {
   const { data: popular } = useQuery({
@@ -61,15 +62,6 @@ const SearchMenu = () => {
         </Text>
         <FlatList
           data={popular}
-          renderItem={renderItem}
-          horizontal
-          contentContainerStyle={{ gap: 10 }}
-        />
-      </View>
-      <View style={{ gap: 10, paddingVertical: 30 }}>
-        <Text style={{ color: "#fff", marginLeft: 10 }}>Top Rated Movies</Text>
-        <FlatList
-          data={topRated}
           renderItem={renderItem}
           horizontal
           contentContainerStyle={{ gap: 10 }}

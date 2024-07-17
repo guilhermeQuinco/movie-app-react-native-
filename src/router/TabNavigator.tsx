@@ -2,7 +2,7 @@ import React from "react";
 import { Movie } from "../services/movies/MovieApiModels";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/Home/HomeScreen";
-import MovieScreen from "../screens/Home/MovieScreen";
+import MovieScreen from "../screens/Movie/MovieScreen";
 import Router from "./Router";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -25,6 +25,7 @@ const TabNavigation = () => {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="home" color={color} size={size} />
           ),
+          tabBarHideOnKeyboard: true,
         }}
       />
       <Tab.Screen
@@ -35,6 +36,7 @@ const TabNavigation = () => {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="search" color={color} size={size} />
           ),
+          tabBarHideOnKeyboard: true,
         }}
       />
     </Tab.Navigator>
