@@ -14,17 +14,25 @@ const statusBarHeight = StatusBar.currentHeight
   : 64;
 
 const NavBar = () => {
-  return <SafeAreaView style={styles.container}></SafeAreaView>;
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={{ color: "#fff" }}>Test</Text>
+    </SafeAreaView>
+  );
 };
 
 export default NavBar;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
-    paddingTop: statusBarHeight,
+    width: "100%",
+    backgroundColor: "transparent",
     paddingHorizontal: 10,
     paddingVertical: 20,
     gap: 10,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 10,
   },
 });

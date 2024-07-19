@@ -10,6 +10,7 @@ import CardMovie from "../../../components/card-movie";
 import { Movie } from "../../../services/movies/MovieApiModels";
 import ItemSeparator from "../../../components/item-separator";
 import SearchCardList from "./SearchCardList";
+import { size } from "lodash";
 
 const SearchMenu = () => {
   const { data: popular } = useQuery({
@@ -32,39 +33,63 @@ const SearchMenu = () => {
   }
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={{ gap: 10, paddingVertical: 30 }}>
-        <Text style={{ color: "#fff", marginLeft: 10 }}>Genres</Text>
-        <FlatList
-          data={genres}
-          ListHeaderComponent={<ItemSeparator width={2} height={0} />}
-          renderItem={({ item }) => (
-            <Text
-              style={{
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                backgroundColor: "#fff",
-                borderRadius: 10,
-              }}
-            >
-              {item.name}
-            </Text>
-          )}
-          horizontal
-          contentContainerStyle={{ gap: 10 }}
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-
-      <View style={{ gap: 10, paddingVertical: 30 }}>
-        <Text style={{ color: "#fff", marginLeft: 10 }}>
-          Recommended Movies
-        </Text>
         <FlatList
           data={popular}
+          numColumns={2}
           renderItem={renderItem}
-          horizontal
+          columnWrapperStyle={{ gap: 10, paddingHorizontal: 20 }}
           contentContainerStyle={{ gap: 10 }}
+          ListHeaderComponent={() => (
+            <View>
+              <Text
+                style={{
+                  color: "#fff",
+                  marginLeft: 20,
+                  marginBottom: 10,
+                  fontWeight: "bold",
+                  fontSize: 15,
+                }}
+              >
+                Genres
+              </Text>
+
+              <FlatList
+                data={genres}
+                renderItem={({ item }) => (
+                  <Text
+                    style={{
+                      paddingVertical: 10,
+                      paddingHorizontal: 20,
+                      backgroundColor: "#fff",
+                      borderRadius: 10,
+                    }}
+                  >
+                    {item.name}
+                  </Text>
+                )}
+                horizontal
+                contentContainerStyle={{
+                  gap: 10,
+                  paddingHorizontal: 20,
+                }}
+                showsHorizontalScrollIndicator={false}
+              />
+
+              <Text
+                style={{
+                  color: "#fff",
+                  marginLeft: 20,
+                  marginTop: 20,
+                  fontWeight: "bold",
+                  fontSize: 15,
+                }}
+              >
+                Popular Movies
+              </Text>
+            </View>
+          )}
         />
       </View>
     </View>

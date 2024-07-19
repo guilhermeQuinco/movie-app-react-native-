@@ -1,5 +1,8 @@
 import {
+  Dimensions,
   FlatList,
+  Image,
+  ImageBackground,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -13,7 +16,9 @@ import { useQuery } from "@tanstack/react-query";
 import NavBar from "../../components/nav-bar";
 import { Movie } from "../../services/movies/MovieApiModels";
 import CardMovie from "../../components/card-movie";
-import ItemSeparator from "../../components/item-separator";
+import { BASE_IMAGE_URL } from "../../constants";
+import Pagiantion from "../../components/pagination";
+import { LinearGradient } from "expo-linear-gradient";
 
 const HomeScreen = () => {
   const { data: nowPlaying } = useQuery({
@@ -22,26 +27,59 @@ const HomeScreen = () => {
   });
 
   function renderItem({ item }: { item: Movie }) {
-    return <CardMovie {...item} />;
+    const { width, height } = Dimensions.get("screen");
+
+    return (
+      <View style={{ alignItems: "flex-start", width, height }}>
+        <ImageBackground
+          source={{ uri: `${BASE_IMAGE_URL}${item.poster_path}` }}
+          resizeMode="cover"
+          style={{ width: "100%", flex: 0.7 }}
+        >
+          <LinearGradient
+            colors={["transparent", "rgba(0,0,0,1.0)"]}
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: 200,
+              padding: 10,
+            }}
+          />
+        </ImageBackground>
+      </View>
+    );
   }
 
   return (
     <View style={styles.container}>
+      <StatusBar />
       <NavBar />
 
-      <View style={{ gap: 20, paddingVertical: 40 }}>
-        <Text style={{ color: "#fff", marginLeft: 10 }}>
-          Now playing Movies
-        </Text>
-        <FlatList
-          data={nowPlaying}
-          renderItem={renderItem}
-          horizontal
-          contentContainerStyle={{ gap: 10 }}
-          ListHeaderComponent={<ItemSeparator width={2} height={0} />}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </View>
+      <ScrollView>
+        <View>
+          <FlatList
+            data={nowPlaying}
+            renderItem={renderItem}
+            horizontal
+            keyExtractor={(item) => item.id.toString()}
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+          />
+          <Pagiantion data={nowPlaying} />
+        </View>
+        <View>
+          <FlatList
+            data={nowPlaying}
+            renderItem={({ item }) => <CardMovie {...item} />}
+            horizontal
+            keyExtractor={(item) => item.id.toString()}
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };

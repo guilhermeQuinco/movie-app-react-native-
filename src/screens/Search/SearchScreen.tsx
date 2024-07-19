@@ -24,7 +24,7 @@ const SearchScreen = () => {
   });
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#060809" }}>
+    <View style={{ flex: 1, backgroundColor: "#060809" }}>
       <StatusBar />
 
       <TextInput
@@ -38,19 +38,19 @@ const SearchScreen = () => {
       ) : (
         <SearchList search={search as Movie[]} />
       )}
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    margin: 5,
+    margin: 10,
     height: 50,
     borderWidth: 1,
     padding: 10,
     backgroundColor: "gray",
     marginTop: 50,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     borderRadius: 10,
     paddingHorizontal: 20,
   },

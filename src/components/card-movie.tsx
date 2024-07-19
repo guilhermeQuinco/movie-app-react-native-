@@ -18,7 +18,7 @@ const CardMovie = (movie: Movie) => {
     >
       <Image
         source={{ uri: `${BASE_IMAGE_URL}/${movie.poster_path}` }}
-        style={{ width: 150, height: 220, borderRadius: 20 }}
+        style={{ height: 250, borderRadius: 20 }}
       />
     </TouchableOpacity>
   );
@@ -28,9 +28,9 @@ export default CardMovie;
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
     flex: 1,
     borderRadius: 20,
-    width: 150,
-    height: 220,
+    height: 250,
   },
 });

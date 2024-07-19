@@ -11,6 +11,7 @@ import { BASE_IMAGE_URL } from "../../../constants";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { MovieDetail } from "../../../services/movies/MovieDetailsApiModel";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const HeaderMovie = (movieDetail: MovieDetail) => {
   const navigation = useNavigation();
@@ -25,7 +26,7 @@ const HeaderMovie = (movieDetail: MovieDetail) => {
         source={{ uri: `${BASE_IMAGE_URL}${movieDetail?.backdrop_path}` }}
         style={{
           width: width,
-          height: 200,
+          height: 250,
         }}
         resizeMode="cover"
       >
@@ -34,6 +35,10 @@ const HeaderMovie = (movieDetail: MovieDetail) => {
             <MaterialIcons name="arrow-back-ios-new" color={"#fff"} size={25} />
           </TouchableOpacity>
         </View>
+        <LinearGradient
+          colors={["transparent", "rgba(0,0,0,1.0)"]}
+          style={styles.background}
+        />
       </ImageBackground>
     </View>
   );
@@ -47,5 +52,13 @@ const styles = StyleSheet.create({
     left: 0,
     position: "absolute",
     padding: 10,
+  },
+
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 200,
   },
 });

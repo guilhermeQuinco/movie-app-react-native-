@@ -7,6 +7,7 @@ import Router from "./Router";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SearchScreen from "../screens/Search/SearchScreen";
+import FavoritesScreen from "../screens/Favorites/FavoritesScreen";
 
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
@@ -24,6 +25,17 @@ const TabNavigation = () => {
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="home" color={color} size={size} />
+          ),
+          tabBarHideOnKeyboard: true,
+        }}
+      />
+      <Tab.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="heart-o" color={color} size={size} />
           ),
           tabBarHideOnKeyboard: true,
         }}
