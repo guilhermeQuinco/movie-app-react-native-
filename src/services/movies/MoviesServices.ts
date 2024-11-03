@@ -4,11 +4,12 @@ import { Genre, Movie, MoviesResponse } from "./MovieApiModels";
 import { MovieDetail } from "./MovieDetailsApiModel";
 
 export async function getNowPlayingMovies() {
-  const response = await api.get<MoviesResponse>(
-    `movie/now_playing?api_key=${process.env.EXPO_PUBLIC_API_KEY}`
-  );
-
-  return response.data.results;
+  try {
+    const response = await api.get<MoviesResponse>(
+      `movie/now_playing?api_key=${process.env.EXPO_PUBLIC_API_KEY}`
+    );
+    return response.data.results;
+  } catch (error) {}
 }
 
 export async function getPopularMovies() {
@@ -20,11 +21,13 @@ export async function getPopularMovies() {
 }
 
 export async function getTopRatedMovies() {
-  const response = await api.get<MoviesResponse>(
-    `movie/top_rated?api_key=${process.env.EXPO_PUBLIC_API_KEY}`
-  );
+  try {
+    const response = await api.get<MoviesResponse>(
+      `movie/top_rated?api_key=${process.env.EXPO_PUBLIC_API_KEY}`
+    );
 
-  return response.data.results;
+    return response.data.results;
+  } catch (error) {}
 }
 
 export async function getGenres() {

@@ -7,6 +7,6 @@ export const api = axios.create({
   baseURL: `${BASE_HTTP_URL}`,
   headers: {
     Authorization: `Bearer ${token}`,
-    accept: "application/json",
+    Accept: "application/json",
   },
 });

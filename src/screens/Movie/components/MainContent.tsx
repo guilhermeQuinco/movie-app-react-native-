@@ -24,6 +24,8 @@ const MainContent = (movieDetail: MovieDetail) => {
     queryFn: () => getCast(movieDetail.id),
   });
 
+  console.log(cast);
+
   function renderItemMovie({ item }: { item: Movie }) {
     return <CardMovie {...item} />;
   }

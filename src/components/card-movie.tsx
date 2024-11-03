@@ -18,7 +18,7 @@ const CardMovie = (movie: Movie) => {
     >
       <Image
         source={{ uri: `${BASE_IMAGE_URL}/${movie.poster_path}` }}
-        style={{ height: 250, borderRadius: 20 }}
+        style={{ width: 170, height: 250, borderRadius: 20 }}
       />
     </TouchableOpacity>
   );
